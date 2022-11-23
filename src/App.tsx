@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useContext } from 'react';
 import './App.css';
+import GoogleLoginButton from './components/authentication/GoogleLoginButton';
+import Header from './components/layout/Header';
+import { AuthenticationContext } from './context/authentication.context';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const { currentUser } = useContext(AuthenticationContext);
+	return (
+		<>
+			<Header />
+			{!currentUser && (
+				<div className='h-80 flex items-center justify-center'>
+					<GoogleLoginButton />
+				</div>
+			)}
+		</>
+	);
 }
 
 export default App;
